@@ -50,6 +50,7 @@ router.post("/vehicules", async (request, response) => {
     try {
       await vehicule.save();
       response.send(vehicule);
+      response.status(201).send();
     } catch (error) {
       response.status(500).send(error);
     }
@@ -73,8 +74,8 @@ router.delete("/vehicules/:id", async (request, response) => {
     try {
       const vehicule = await vehiculeModel.findByIdAndDelete({_id:request.params.id});
       
-      if (!vehicule) response.status(404).send("No item found");
-      response.status(200).send();
+      if (!vehicule) response.status(204).send("No item found");
+      response.status(410).send();
     } catch (error) {
       response.status(500).send(error);
     }
