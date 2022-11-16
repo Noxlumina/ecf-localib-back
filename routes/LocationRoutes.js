@@ -1,8 +1,8 @@
 const express = require("express");
 const locationModel = require("../models/location");
-const app = express();
+const router = express.Router();
 
-app.get("/locations", async (request, response) => {
+router.get("/locations", async (request, response) => {
   const locations = await locationModel.find({});
   console.log("route get all locations");
 
@@ -13,8 +13,7 @@ app.get("/locations", async (request, response) => {
     response.status(500).send(error);
   }
 });
-
-app.get("/location/:id", async (request, response) => {
+router.get("/locations/:id", async (request, response) => {
   const location = await locationModel.findOne({_id:request.params.id});
   console.log("route get one");
 
@@ -25,7 +24,7 @@ app.get("/location/:id", async (request, response) => {
     response.status(500).send(error);
   }
 });
-app.post("/location", async (request, response) => {
+router.post("/locations", async (request, response) => {
     const location = new locationModel(request.body);
   
     try {
@@ -35,10 +34,7 @@ app.post("/location", async (request, response) => {
       response.status(500).send(error);
     }
   });
-  
-  // ...
-
-app.patch("/location/patch/:id", async (request, response) => {
+router.patch("/locations/:id", async (request, response) => {
     try {
       await locationModel.findByIdAndUpdate({_id:request.params.id}, request.body);
       await locationModel.save();
@@ -47,10 +43,7 @@ app.patch("/location/patch/:id", async (request, response) => {
       response.status(500).send(error);
     }
   });
-  
-// ...
-
-app.delete("/locations/delete/:id", async (request, response) => {
+router.delete("/locations/:id", async (request, response) => {
     try {
       const location = await locationModel.findByIdAndDelete({_id:request.params.id});
       
@@ -60,6 +53,4 @@ app.delete("/locations/delete/:id", async (request, response) => {
       response.status(500).send(error);
     }
   });
-  
-  // ...
-module.exports = app;
+module.exports = router;

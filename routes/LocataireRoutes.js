@@ -1,14 +1,12 @@
 const express = require("express");
 const locataireModel = require("../models/locataire");
-const app = express();
+const router = express.Router();
 
 //creation du CRUD pour un locataire
-
-
 /*
 *voie get sur locataire permettant de récupérer tous les locataires
 */
-app.get("/locataires", async (request, response) => {
+router.get("/locataires", async (request, response) => {
   const locataires = await locataireModel.find({});
   console.log("route get all vehicules");
 
@@ -19,11 +17,10 @@ app.get("/locataires", async (request, response) => {
     response.status(500).send(error);
   }
 });
-
 /*
 *voie get sur locataire permettant de récupérer un locataire en fonction de son id
 */
-app.get("/locataires/:id", async (request, response) => {
+router.get("/locataires/:id", async (request, response) => {
   const locataire = await locataireModel.findOne({_id:request.params.id});
   console.log("route get one");
   try {
@@ -33,11 +30,10 @@ app.get("/locataires/:id", async (request, response) => {
     response.status(500).send(error);
   }
 });
-
 /*
 *voie post sur locataire permettant de créer un locataire 
 */
-app.post("/locataires", async (request, response) => {
+router.post("/locataires", async (request, response) => {
     const locataire = new locataireModel(request.body);
   
     try {
@@ -47,11 +43,10 @@ app.post("/locataires", async (request, response) => {
       response.status(500).send(error);
     }
   });
-
 /*
 *voie patch sur locataire permettant de update un locataire 
 */
-app.patch("/locataires/:id", async (request, response) => {
+router.patch("/locataires/:id", async (request, response) => {
     try {
       await locataireModel.findByIdAndUpdate({_id:request.params.id}, request.body);
       await locataireModel.save();
@@ -60,12 +55,10 @@ app.patch("/locataires/:id", async (request, response) => {
       response.status(500).send(error);
     }
   });
-  
-
 /*
 *voie delete sur locataire permettant de supprimer un locataire 
 */
-app.delete("/locataires/:id", async (request, response) => {
+router.delete("/locataires/:id", async (request, response) => {
     try {
       const locataire = await locataireModel.findByIdAndDelete({_id:request.params.id});
       
@@ -76,4 +69,4 @@ app.delete("/locataires/:id", async (request, response) => {
     }
   });
   
-module.exports = app;
+module.exports = router;
