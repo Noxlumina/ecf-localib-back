@@ -10,7 +10,6 @@ const router = express.Router();
 router.get("/locataires", async (request, response) => {
   const locataires = await locataireModel.find({});
   console.log("route get all vehicules");
-
   try {
     response.send(locataires);
     console.log(locataires);
@@ -23,7 +22,7 @@ router.get("/locataires", async (request, response) => {
  *voie get sur locataire permettant de récupérer un locataire en fonction de son id
  */
 router.get("/locataires/:id", async (request, response) => {
-  if (request.params.id instanceof ObjectId) {
+  if (request.params.id.length == 24) {
     const locataire = await locataireModel.findOne({ _id: request.params.id });
     console.log("route get one");
     try {
@@ -34,7 +33,7 @@ router.get("/locataires/:id", async (request, response) => {
       response.status(500).send(error);
     }
   } else {
-    response.status(204).send(error);
+    response.status(204).send("No item found");
   }
 });
 /*
@@ -42,7 +41,6 @@ router.get("/locataires/:id", async (request, response) => {
  */
 router.post("/locataires", async (request, response) => {
   const locataire = new locataireModel(request.body);
-
   try {
     await locataire.save();
     response.send(locataire);

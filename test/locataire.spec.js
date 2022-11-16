@@ -26,7 +26,8 @@ describe("POST /users", () => {
     it("should return 200 and check user with name 'Test' exist", () => {
         return request(process.env.APIURI)
             .post("/locataires")
-            .send({ nom: "Test", prenom: "test", email: "testy", password: "test" })
+            //ajout d'un utilisateur témoin
+            .send({ nom: "Test", prenom: "test", email: "test", password: "test" })
             .expect(200)
             .then(() => {
                 return request(process.env.APIURI)
@@ -40,11 +41,11 @@ describe("POST /users", () => {
 describe("Delete /locataires/{id}", () => {
     it("supprime l'utilisateur code 410 puis 204", () => {
         return request(process.env.APIURI)
-            .del("/locataires/6350fbb64300910b94ef4f38")
+            .del("/locataires/63750dcd0d626b2fd09d79b9")
             .expect(410)
             .then(() => {
                 return request(process.env.APIURI)
-                    .del("/locataires/6350fbb64300910b94ef4f38")
+                    .del("/locataires/63750dcd0d626b2fd09d79b9")
                     .expect(204)
             });
     });
