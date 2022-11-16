@@ -28,10 +28,6 @@ const LocataireSchema = new mongoose.Schema({
     }
 });
 
-// LocataireSchema.virtual('categoryId').get(function() {
-//     return this._id;
-// });
-
 const Locataire = mongoose.model("Locataire", LocataireSchema,"Locataires");
 
 module.exports = Locataire;
