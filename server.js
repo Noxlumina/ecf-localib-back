@@ -8,7 +8,6 @@ const locationRouter = require("./routes/locationRoutes.js");
 //initialisation de express
 let app = express();
 app.use(express.json());
-
 //connection à la base de donnée avec mongoose une surcouche à MongoDB
 mongoose.connect(
   connectionString,
