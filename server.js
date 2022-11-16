@@ -6,7 +6,7 @@ const vehiculeRouter = require("./routes/vehiculeRoutes.js");
 const locationRouter = require("./routes/locationRoutes.js");
 
 //initialisation de express
-const app = express();
+let app = express();
 app.use(express.json());
 
 //connection à la base de donnée avec mongoose une surcouche à MongoDB
