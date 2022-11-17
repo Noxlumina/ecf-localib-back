@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const app = require("./app.js");
+const connectionString = process.env.CONECTIONSTRING_MONGO;
 //connection à la base de donnée avec mongoose une surcouche à MongoDB
 mongoose.connect(
-  process.env.CONECTIONSTRING_MONGO,
+  connectionString,
   {
     useNewUrlParser: true,
     useFindAndModify: false,
