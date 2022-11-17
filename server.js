@@ -1,9 +1,8 @@
-const connectionString = "mongodb+srv://Localib:Localib@localib.88i6cko.mongodb.net/Localib?retryWrites=true&w=majority";
 const mongoose = require("mongoose");
 const app = require("./app.js");
 //connection à la base de donnée avec mongoose une surcouche à MongoDB
 mongoose.connect(
-  connectionString,
+  process.env.CONECTIONSTRING_MONGO,
   {
     useNewUrlParser: true,
     useFindAndModify: false,
